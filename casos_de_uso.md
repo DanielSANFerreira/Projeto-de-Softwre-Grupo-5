@@ -38,7 +38,7 @@
 
 ### CDU 02 – Pesquisar eventos
 
-## Lista dos Atores 
+#### Lista dos Atores 
 
 - Usuário visitante (não autenticado)
 - Usuário autenticado (cadastrado/logado)
@@ -56,7 +56,7 @@
 
 ### CDU 03 – Visualizar detalhes de evento
 
-## Lista dos Atores 
+####  Atores 
 
 - Usuário visitante (não autenticado)
 - Usuário autenticado (cadastrado/logado)
