@@ -2,9 +2,9 @@
 
 ## Lista dos Casos de Uso
 
-- [CDU 01](#CDU-01---Fazer-login): Fazer login
-- [CDU 02](#CDU-02---Pesquisar-eventos): Pesquisar eventos
-- [CDU 03](#CDU-03---Visualizar-detalhes-de-evento): Visualizar detalhes de evento
+- [CDU 01](#cdu-01--fazer-login): Fazer login
+- [CDU 02](#cdu-02--pesquisar-eventos): Pesquisar eventos
+- [CDU 03](#cdu-03--visualizar-detalhes-de-evento): Visualizar detalhes de evento
 
 ## Lista dos Atores
 
