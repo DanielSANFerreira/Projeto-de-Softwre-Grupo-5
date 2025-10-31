@@ -150,12 +150,11 @@ body {
 }
 
 .user-info {
-    color: white; /* Garante que o texto permaneça branco, e não azul (padrão de link) */
-    text-decoration: none; /* Remove o sublinhado padrão dos links */
-    transition: opacity 0.2s ease-in-out; /* Efeito suave ao passar o mouse */
+    color: white; 
+    text-decoration: none; 
+    transition: opacity 0.2s ease-in-out; 
 }
 
-/* Adiciona um feedback visual quando o mouse está sobre o link */
 .user-info:hover {
     opacity: 0.8;
 }
