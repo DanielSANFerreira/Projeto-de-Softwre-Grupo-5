@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -112,15 +113,41 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / 'AllEvent' / 'static'
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_REDIRECT_URL = '/' # Ou o nome/caminho da sua home, ex: '/home/'
+
+# Redireciona para a página de login após o usuário fazer logout
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Se um usuário não logado tentar acessar uma página protegida,
+# ele será enviado para a URL com o nome 'login'
+LOGIN_URL = 'login' 
+
+# Adicione esta linha para evitar o erro de CSRF com HTTPS em localhost
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'http://localhost:8000', 'https://127.0.0.1:8000', 'http://127.0.0.1:8000']
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # ESTA LINHA É A MAIS IMPORTANTE
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+LOGOUT_REDIRECT_URL = '/accounts/login/'

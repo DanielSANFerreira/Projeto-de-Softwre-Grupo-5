@@ -18,15 +18,26 @@
     </header>
 
     <main class="main-content">
-        <div class="auth-card">
-            <form class="auth-form">
-                <input type="text" placeholder="Nome completo" required>
-                <input type="email" placeholder="E-mail" required>
-                <input type="password" placeholder="Senha" required>
-                <input type="password" placeholder="Confirme a senha" required>
-                <button type="submit" class="btn btn-primary">CRIAR CONTA</button>
-            </form>
-        </div>
+        <form class="auth-form" method="POST"> <!-- Precisa ser POST -->
+    {% csrf_token %} <!-- Obrigatório para segurança -->
+
+    <!-- Os atributos "name" devem corresponder ao que a view espera -->
+    <input type="text" name="nome_completo" placeholder="Nome completo" required>
+    <input type="email" name="email" placeholder="E-mail" required>
+    <input type="password" name="password" placeholder="Senha" required>
+    <input type="password" name="password_confirm" placeholder="Confirme a senha" required>
+    
+    <button type="submit" class="btn btn-primary">CRIAR CONTA</button>
+</form>
+
+<!-- BÔNUS: Adicione este bloco para mostrar erros de validação (senhas não coincidem, etc.) -->
+    {% if messages %}
+    <div style="margin-top: 15px;">
+         {% for message in messages %}
+                    <p style="color: red; font-weight: bold;">{{ message }}</p>
+                {% endfor %}
+            </div>
+    {% endif %}
     </main>
 </body>
 </html>

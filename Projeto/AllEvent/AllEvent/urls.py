@@ -23,8 +23,6 @@ from django.urls import include
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # Add the home view URL pattern
-    path('login_site/', views.login_view, name='login'),
     path('cadastro_site/', views.cadastro, name='cadastro'),
     path('editar-dados/', views.editar_dados_view, name='editar_dados'),
     path('favoritos/', views.favoritos_view, name='favoritos'),
@@ -33,5 +31,6 @@ urlpatterns = [
     path('lista/', views.lista_view, name='lista'),
     path('home_site/', views.home, name='home'),
     path('event_site/', views.event_view, name='event'),
-    path('', views.home, name='home'),  # Map the home view to the root URL
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', views.home, name='home'),
 ]

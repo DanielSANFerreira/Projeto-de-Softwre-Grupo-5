@@ -719,3 +719,20 @@ a.event-card:hover {
 .btn-outline:hover {
     background: rgba(13, 110, 253, 0.06); /* Hover leve com a cor primária */
 }
+
+/* Adicione este estilo para que o botão de logout pareça um link */
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit; /* Herda a fonte do elemento pai */
+    color: inherit; /* Herda a cor do elemento pai */
+    cursor: pointer;
+    text-align: center; /* Garante que o texto está alinhado */
+    display: inline; /* Garante que se comporte como texto */
+}
+
+.logout-button:hover {
+    /* Você pode adicionar um efeito de hover se quiser, como sublinhado ou mudança de cor */
+    text-decoration: underline; 
+}

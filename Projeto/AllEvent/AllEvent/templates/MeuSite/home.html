@@ -21,8 +21,14 @@
         <div class="tagline">Eventos de Qualquer Lugar</div>
       </div>
       <div class="row">
-        <a class="btn btn-ghost" href="{% url 'login' %}">SIGN IN</a> <!-- Transformado em link -->
-        <a class="btn btn-ghost" href="{% url 'perfil' %}">PERFIL</a> <!-- Transformado em link -->
+        {% if user.is_authenticated %}
+          <!-- Se o usuário ESTIVER logado, mostre este botão -->
+          <a class="btn btn-ghost" href="{% url 'perfil' %}">PERFIL</a>
+      {% else %}
+          <!-- Se o usuário NÃO ESTIVER logado, mostre este botão -->
+          <a class="btn btn-ghost" href="{% url 'login' %}">SIGN IN</a>
+      {% endif %}
+      <!-- FIM DA LÓGICA CONDICIONAL -->
         <button class="btn btn-icon" aria-label="Buscar">🔍</button>
         <a class="btn btn-home-primary" href="{% url 'event' %}">SEU EVENTO</a> <!-- Usando a nova classe btn-home-primary -->
       </div>

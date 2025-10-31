@@ -10,11 +10,15 @@
 </head>
 <body>
 
-    <header class="site-header compact"> <!-- Adicionada classe compact -->
+    <header class="site-header compact">
         <div class="container header-container">
-            <h1 class="logo">AllEvent</h1>
-            <a href="perfil.html" class="user-info">
-                 <i class="fas fa-user-circle user-icon"></i>
+            <!-- Logo agora é um link para 'favoritos' -->
+            <h1 class="logo">
+                <a href="{% url 'home' %}">AllEvent</a>
+            </h1>
+            <!-- Ícone de perfil agora é um link para 'perfil' -->
+            <a href="{% url 'perfil' %}" class="user-info">
+                <i class="fas fa-user-circle user-icon"></i>
             </a>
         </div>
     </header>
