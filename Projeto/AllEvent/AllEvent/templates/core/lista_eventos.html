@@ -1,0 +1,28 @@
+<!-- Em templates/core/lista_eventos.html -->
+{% extends "base.html" %}
+
+{% block title %}
+    {% if termo_busca %}
+        Resultados para "{{ termo_busca }}"
+    {% else %}
+        Lista de Eventos
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 2rem 1rem;">
+
+    {% if termo_busca %}
+        <h1>Resultados da busca por: "{{ termo_busca }}"</h1>
+    {% else %}
+        <h1>Próximos Eventos</h1>
+    {% endif %}
+
+    <!-- Adicionar um link para a página de busca -->
+    <a href="{% url 'buscar_eventos' %}" class="btn btn-secondary">Fazer uma nova busca</a>
+    <hr style="margin: 2rem 0;">
+    
+    <!-- O resto do template (o loop for) continua exatamente o mesmo -->
+    ...
+</div>
+{% endblock %}

@@ -7,16 +7,27 @@
     <title>Preferências - Perfil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+<style>
+        .header-container {
+            display: flex;
+            justify-content: space-between; /* Alinha itens nas extremidades */
+            align-items: center;           /* Alinha verticalmente ao centro */
+            width: 100%;                   /* Garante que o container ocupe toda a largura */
+        }
+
+        .logo a {
+            text-decoration: none; /* Remove o sublinhado do link */
+            color: inherit;        /* Faz o link herdar a cor do texto do pai */
+        }
+    </style>
 </head>
 <body>
 
     <header class="site-header compact">
         <div class="container header-container">
-            <!-- Logo agora é um link para 'favoritos' -->
             <h1 class="logo">
                 <a href="{% url 'home' %}">AllEvent</a>
             </h1>
-            <!-- Ícone de perfil agora é um link para 'perfil' -->
             <a href="{% url 'perfil' %}" class="user-info">
                 <i class="fas fa-user-circle user-icon"></i>
             </a>
@@ -30,7 +41,10 @@
                 <a href="{% url 'preferencias' %}" class="nav-link">Preferências</a>
                 <a href="{% url 'favoritos' %}" class="nav-link">Favoritos</a>
             </div>
-            <a href="/logout" class="nav-link logout-button">Log-out</a>
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+            {% csrf_token %}
+                 <button type="submit" class="nav-link logout-button">Log-out</button>
+            </form>
         </aside>
 
         <section class="profile-content">

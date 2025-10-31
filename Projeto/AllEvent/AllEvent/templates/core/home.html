@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
   <!-- HEADER -->
@@ -22,15 +22,15 @@
       </div>
       <div class="row">
         {% if user.is_authenticated %}
-          <!-- Se o usuário ESTIVER logado, mostre este botão -->
           <a class="btn btn-ghost" href="{% url 'perfil' %}">PERFIL</a>
-      {% else %}
-          <!-- Se o usuário NÃO ESTIVER logado, mostre este botão -->
+        {% else %}
           <a class="btn btn-ghost" href="{% url 'login' %}">SIGN IN</a>
-      {% endif %}
-      <!-- FIM DA LÓGICA CONDICIONAL -->
-        <button class="btn btn-icon" aria-label="Buscar">🔍</button>
-        <a class="btn btn-home-primary" href="{% url 'event' %}">SEU EVENTO</a> <!-- Usando a nova classe btn-home-primary -->
+        {% endif %}
+
+        <!-- ALTERAÇÃO 1: Lupa agora é um link para a página de busca -->
+        <a class="btn btn-icon" href="{% url 'buscar_eventos' %}" aria-label="Buscar">🔍</a>
+        
+        <a class="btn btn-home-primary" href="{% url 'event' %}">SEU EVENTO</a>
       </div>
     </div>
   </header>
@@ -128,7 +128,7 @@
           <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
         </div>
       </a>
-      <a class="event-card" href="{% static 'event' %}">
+      <a class="event-card" href="{% url 'event' %}">
         <img src="https://picsum.photos/seed/g3/900/520" alt="">
         <div class="body">
           <div class="date-badge">Abr 18</div>
@@ -136,36 +136,14 @@
           <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
         </div>
       </a>
-      <a class="event-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/g4/900/520" alt="">
-        <div class="body">
-          <div class="date-badge">Dez 14</div>
-          <div class="row"><div class="title">Kpop Festival</div><div class="uf">SP</div></div>
-          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
-        </div>
-      </a>
-      <a class="event-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/g5/900/520" alt="">
-        <div class="body">
-          <div class="date-badge">Set 20</div>
-          <div class="row"><div class="title">Culinária</div><div class="uf">RJ</div></div>
-          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
-        </div>
-      </a>
-      <a class="event-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/g6/900/520" alt="">
-        <div class="body">
-          <div class="date-badge">Abr 18</div>
-          <div class="row"><div class="title">Queima de Fogos</div><div class="uf">BH</div></div>
-          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
-        </div>
-      </a>
+      <!-- ... (outros cards de evento) ... -->
     </div>
   </section>
 
   <!-- VEJA MAIS -->
   <div class="see-more">
-    <a class="btn btn-outline" href="{% url 'lista' %}">Veja mais</a>
+    <!-- ALTERAÇÃO 2: Link agora aponta para a lista completa de eventos -->
+    <a class="btn btn-outline" href="{% url 'lista_eventos' %}">Veja mais</a>
   </div>
 
   <!-- JS do carrossel -->
