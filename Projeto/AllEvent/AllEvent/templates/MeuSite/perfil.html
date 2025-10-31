@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+</head>
+<body>
+
+    <header class="site-header compact"> <!-- Adicionada classe compact -->
+        <div class="container header-container">
+            <h1 class="logo">AllEvent</h1>
+            <a href="perfil.html" class="user-info"> <!-- Transformado em link para o próprio perfil, se houver um clique no ícone -->
+                <i class="fas fa-user-circle user-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <aside class="profile-nav">
+            <div class="nav-links">
+                <a href="{% url 'editar_dados' %}" class="nav-link">Editar Dados</a>
+                <a href="{% url 'preferencias' %}" class="nav-link">Preferências</a>
+                <a href="{% url 'favoritos' %}" class="nav-link">Favoritos</a>
+            </div>
+            <a href="/logout" class="nav-link logout-button">Log-out</a>
+        </aside>
+
+        <section class="profile-content">
+            <h2>Bem-vindo ao seu Perfil</h2>
+            <p>Selecione uma opção no menu ao lado para visualizar ou editar suas informações.</p>
+        </section>
+    </main>
+
+</body>
+</html>

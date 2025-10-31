@@ -1,0 +1,195 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AllEvent</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">AllEvent</div>
+        <div class="tagline">Eventos de Qualquer Lugar</div>
+      </div>
+      <div class="row">
+        <a class="btn btn-ghost" href="{% url 'login' %}">SIGN IN</a> <!-- Transformado em link -->
+        <a class="btn btn-ghost" href="{% url 'perfil' %}">PERFIL</a> <!-- Transformado em link -->
+        <button class="btn btn-icon" aria-label="Buscar">🔍</button>
+        <a class="btn btn-home-primary" href="{% url 'event' %}">SEU EVENTO</a> <!-- Usando a nova classe btn-home-primary -->
+      </div>
+    </div>
+  </header>
+
+  <!-- CARD DE BUSCA -->
+  <div class="search-wrap">
+    <section class="search-card">
+      <div class="search-grid">
+        <div class="field">
+          <label>Nome do Evento</label>
+          <div class="value">Festival de Primavera</div>
+          <div class="line"></div>
+        </div>
+        <div class="field">
+          <label>Local</label>
+          <div class="value">Sergipe ⌄</div>
+          <div class="line"></div>
+        </div>
+        <div class="field">
+          <label>Data/ Mês</label>
+          <div class="value">20/05 ⌄</div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CARROSSEL -->
+  <section class="carousel" aria-label="Eventos em destaque">
+    <button class="nav prev" aria-label="Anterior">←</button>
+
+    <div class="track" data-track>
+      <div class="slide is-active"><img src="https://picsum.photos/seed/a/1200/480" alt="Slide 1"></div>
+      <div class="slide"><img src="https://picsum.photos/seed/b/1200/480" alt="Slide 2"></div>
+      <div class="slide"><img src="https://picsum.photos/seed/c/1200/480" alt="Slide 3"></div>
+      <div class="slide"><img src="https://picsum.photos/seed/d/1200/480" alt="Slide 4"></div>
+    </div>
+
+    <button class="nav next" aria-label="Próximo">→</button>
+
+    <div class="dots" role="tablist" aria-label="Selecionar slide">
+      <button class="dot is-active" aria-label="Slide 1"></button>
+      <button class="dot" aria-label="Slide 2"></button>
+      <button class="dot" aria-label="Slide 3"></button>
+      <button class="dot" aria-label="Slide 4"></button>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section class="featured">
+    <h3>🎟️ <strong>Eventos em Destaque:</strong></h3>
+    <div class="featured-row">
+      <a class="card featured-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/f1/400/240" alt="">
+        <div class="fx"><div class="title">Event 001</div><div class="meta">Sertanejo • SP-RJ Dia x/xx</div></div>
+      </a>
+      <a class="card featured-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/f2/400/240" alt="">
+        <div class="fx"><div class="title">Event 002</div><div class="meta">Rock • BH Dia x/xx</div></div>
+      </a>
+      <a class="card featured-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/f3/400/240" alt="">
+        <div class="fx"><div class="title">Event 003</div><div class="meta">Pop • RJ Dia x/xx</div></div>
+      </a>
+      <a class="card featured-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/f4/400/240" alt="">
+        <div class="fx"><div class="title">Event 004</div><div class="meta">Rap • BH Dia x/xx</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FILTROS -->
+  <div class="filters-bar">
+    <button class="pill">Dias da Semana ⌄</button>
+    <button class="pill">Região ⌄</button>
+    <button class="pill">Categorias ⌄</button>
+  </div>
+
+  <!-- GRID DE EVENTOS -->
+  <section class="events">
+    <div class="event-grid">
+      <a class="event-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/g1/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Dez 14</div>
+          <div class="row"><div class="title">Show Alok</div><div class="uf">MG</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+      <a class="event-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/g2/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Set 20</div>
+          <div class="row"><div class="title">Gospel</div><div class="uf">SP</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+      <a class="event-card" href="{% static 'event' %}">
+        <img src="https://picsum.photos/seed/g3/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Abr 18</div>
+          <div class="row"><div class="title">Show Beneficente</div><div class="uf">RJ</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+      <a class="event-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/g4/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Dez 14</div>
+          <div class="row"><div class="title">Kpop Festival</div><div class="uf">SP</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+      <a class="event-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/g5/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Set 20</div>
+          <div class="row"><div class="title">Culinária</div><div class="uf">RJ</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+      <a class="event-card" href="{% url 'event' %}">
+        <img src="https://picsum.photos/seed/g6/900/520" alt="">
+        <div class="body">
+          <div class="date-badge">Abr 18</div>
+          <div class="row"><div class="title">Queima de Fogos</div><div class="uf">BH</div></div>
+          <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- VEJA MAIS -->
+  <div class="see-more">
+    <a class="btn btn-outline" href="{% url 'lista' %}">Veja mais</a>
+  </div>
+
+  <!-- JS do carrossel -->
+  <script>
+  (function(){
+    const track = document.querySelector('[data-track]');
+    const slides = Array.from(track.children);
+    const prev = document.querySelector('.carousel .prev');
+    const next = document.querySelector('.carousel .next');
+    const dots = Array.from(document.querySelectorAll('.carousel .dot'));
+    let i = 0;
+    function go(to){
+      i = (to + slides.length) % slides.length;
+      track.style.transform = `translateX(-${i * 100}%)`;
+      slides.forEach((s,idx)=>{
+        s.classList.toggle('is-active', idx===i);
+        s.classList.toggle('is-prev', idx===(i-1+slides.length)%slides.length);
+        s.classList.toggle('is-next', idx===(i+1)%slides.length);
+      });
+      dots.forEach((d,idx)=>d.classList.toggle('is-active', idx===i));
+    }
+    prev.addEventListener('click', ()=>go(i-1));
+    next.addEventListener('click', ()=>go(i+1));
+    dots.forEach((d,idx)=>d.addEventListener('click', ()=>go(idx)));
+    document.addEventListener('keydown', e=>{
+      if(e.key==='ArrowLeft') go(i-1);
+      if(e.key==='ArrowRight') go(i+1);
+    });
+    go(0);
+  })();
+  </script>
+</body>
+</html>
