@@ -4,6 +4,9 @@ from django.contrib import admin
 from django.urls import path, include
 from core import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -21,5 +24,7 @@ urlpatterns = [
     path('eventos/buscar/', views.buscar_eventos, name='buscar_eventos'),
     path('eventos/resultado/', views.resultado_busca, name='resultado_busca'),
     path('evento/<int:evento_id>/', views.detalhe_evento, name='detalhe_evento'),
-    path('evento/detalhe/', views.event_view, name='event'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

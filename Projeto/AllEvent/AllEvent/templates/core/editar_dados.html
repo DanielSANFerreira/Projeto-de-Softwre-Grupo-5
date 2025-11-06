@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- CSS Adicionado para consistência com a página de perfil -->
     <style>
         .header-container {
             display: flex;
-            justify-content: space-between; /* Alinha itens nas extremidades */
-            align-items: center;           /* Alinha verticalmente ao centro */
-            width: 100%;                   /* Garante que o container ocupe toda a largura */
+            justify-content: space-between; 
+            align-items: center;           
+            width: 100%;                   
         }
 
         .logo a {
-            text-decoration: none; /* Remove o sublinhado do link */
-            color: inherit;        /* Faz o link herdar a cor do texto do pai */
+            text-decoration: none; 
+            color: inherit; 
         }
     </style>
 </head>
@@ -52,11 +51,9 @@
         <section class="profile-content">
             <h2>Editar Dados</h2>
 
-            <!-- Bloco para exibir mensagens de sucesso ou erro -->
             {% if messages %}
                 <div class="messages" style="margin-bottom: 20px;">
                     {% for message in messages %}
-                        <!-- A lógica agora adiciona uma classe 'alert-success' ou 'alert-error' -->
                     <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
                          {{ message }}
                     </div>
@@ -66,24 +63,20 @@
             
             <p>Aqui você pode alterar suas informações pessoais.</p>
             
-            <!-- Formulário corrigido para funcionar com o Django -->
             <form method="POST" action="{% url 'editar_dados' %}">
-                {% csrf_token %} <!-- Token de segurança obrigatório -->
+                {% csrf_token %} 
 
                 <div class="form-group">
                     <label for="name">Nome Completo</label>
-                    <!-- O atributo 'value' pré-preenche o campo com o nome atual do usuário -->
                     <input type="text" id="name" name="name" value="{{ user.first_name }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <!-- O atributo 'value' pré-preenche o campo com o e-mail atual -->
                     <input type="email" id="email" name="email" value="{{ user.email }}" required>
                 </div>
                 <div class="form-group">
     <label for="current_password">Senha Atual</label>
-    <!-- Este campo é OBRIGATÓRIO para salvar qualquer alteração -->
     <input type="password" id="current_password" name="current_password" placeholder="Digite sua senha atual para confirmar" required>
 </div>
 
@@ -104,11 +97,8 @@
     const password = document.querySelector('#password');
 
     togglePassword.addEventListener('click', function (e) {
-        // Alterna o tipo do input entre 'password' e 'text'
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-        
-        // Alterna o ícone do olho entre aberto e fechado
         this.classList.toggle('fa-eye-slash');
     });
 </script>

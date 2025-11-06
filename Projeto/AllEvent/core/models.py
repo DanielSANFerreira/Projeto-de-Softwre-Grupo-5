@@ -7,5 +7,6 @@ class Evento(models.Model):
     data = models.DateTimeField('data do evento')
     descricao = models.TextField(blank=True)
 
+    imagem = models.ImageField(upload_to='eventos_imagens/', null=True, blank=True)
     def __str__(self):
         return self.nome

@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- CSS Adicionado para alinhamento do cabeçalho -->
     <style>
         .header-container {
             display: flex;
-            justify-content: space-between; /* Alinha itens nas extremidades */
-            align-items: center;           /* Alinha verticalmente ao centro */
-            width: 100%;                   /* Garante que o container ocupe toda a largura */
+            justify-content: space-between;
+            align-items: center;     
+            width: 100%;                  
         }
 
         .logo a {
-            text-decoration: none; /* Remove o sublinhado do link */
-            color: inherit;        /* Faz o link herdar a cor do texto do pai */
+            text-decoration: none;
+            color: inherit;   
         }
     </style>
 </head>
@@ -56,17 +55,15 @@
     <div class="user-details" style="margin-top: 2rem;">
         <div class="form-group">
             <label>Nome Completo</label>
-            <!-- Exibe o primeiro nome do usuário. Se não houver, mostra o username. -->
+
             <input type="text" value="{{ user.first_name }}" readonly>
         </div>
         <div class="form-group">
             <label>E-mail</label>
-            <!-- Exibe o e-mail do usuário -->
             <input type="email" value="{{ user.email }}" readonly>
         </div>
         <div class="form-group">
             <label>Senha</label>
-            <!-- NUNCA exiba a senha real. Apenas um placeholder. -->
             <input type="text" value="********" readonly>
         </div>
     </div>

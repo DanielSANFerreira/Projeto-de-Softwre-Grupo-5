@@ -7,13 +7,88 @@
   <title>AllEvent</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+  <!-- ESTILOS FINAIS E LIMPOS PARA A HOME PAGE -->
+  <style>
+    /* --- HEADER (sem alterações) --- */
+    .site-header .brand .logo { font-size: 5.5rem; }
+    .site-header .brand .tagline { font-size: var(--fs-lg); }
+    .site-header .btn-ghost {
+        padding: 14px 28px; font-size: var(--fs-lg); font-weight: 700;
+        border-width: 2px; border-color: white; color: white;
+    }
+    .site-header .btn-ghost:hover { background-color: rgba(255, 255, 255, 0.1); }
+    
+    /* --- BARRA DE BUSCA (sem alterações) --- */
+    .home-search-container {
+      display: flex; align-items: center; gap: var(--spacing-lg);
+      max-width: 900px; margin: var(--spacing-xxxl) auto; padding: 0 var(--spacing-xl);
+    }
+    .home-search-container .btn-icon {
+      background-color: var(--card-background); border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm); color: var(--text-color-dark);
+    }
+    .home-search-form {
+      flex-grow: 1; display: flex; border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-pill); overflow: hidden;
+      background-color: var(--card-background); box-shadow: var(--shadow-sm);
+    }
+    .home-search-input {
+      flex-grow: 1; border: none; padding: 1rem 1.5rem;
+      font-size: 1.1rem; outline: none;
+    }
+    .home-search-button {
+      background: none; border: none; padding: 0 1.5rem;
+      cursor: pointer; color: var(--secondary-color);
+    }
+    .home-search-button i { font-size: 1.3rem; }
+
+    /* --- CARROSSEL: REFEITO PARA 3 CARDS MAIORES --- */
+    .carousel-wrapper {
+        position: relative;
+        max-width: 1400px; /* Contêiner mais largo para acomodar 3 cards grandes */
+        margin: 5rem auto;
+        padding: 0 60px; /* Mais espaço para os botões */
+    }
+
+    .carousel-wrapper .nav {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        z-index: 10; width: 50px; height: 50px; /* Botões maiores */
+        border-radius: 50%; background-color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        display: grid; place-items: center; cursor: pointer;
+        border: 1px solid #eee; font-size: 1.5rem;
+    }
+
+    .carousel-wrapper .prev { left: 0; }
+    .carousel-wrapper .next { right: 0; }
+
+    .carousel { overflow: hidden; }
+
+    .carousel .track {
+      display: flex; overflow-x: auto; scroll-behavior: smooth; 
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .carousel .track::-webkit-scrollbar { display: none; }
+
+    /* A MÁGICA PARA MOSTRAR 3 CARDS GRANDES */
+    .carousel .slide {
+      flex: 0 0 33.33%; /* Define que cada slide ocupa 1/3 do espaço */
+      min-width: 380px;  /* Largura mínima para garantir que não fiquem muito pequenos */
+      padding: 0 var(--spacing-lg); /* Espaçamento entre os cards */
+    }
+    
+    .carousel .event-card img {
+        height: 250px; /* Imagens mais altas para uma melhor proporção */
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav">
       <div class="brand">
@@ -26,149 +101,75 @@
         {% else %}
           <a class="btn btn-ghost" href="{% url 'login' %}">SIGN IN</a>
         {% endif %}
-
-        <!-- ALTERAÇÃO 1: Lupa agora é um link para a página de busca -->
-        <a class="btn btn-icon" href="{% url 'buscar_eventos' %}" aria-label="Buscar">🔍</a>
-        
-        <a class="btn btn-home-primary" href="{% url 'event' %}">SEU EVENTO</a>
       </div>
     </div>
   </header>
 
-  <!-- CARD DE BUSCA -->
-  <div class="search-wrap">
-    <section class="search-card">
-      <div class="search-grid">
-        <div class="field">
-          <label>Nome do Evento</label>
-          <div class="value">Festival de Primavera</div>
-          <div class="line"></div>
-        </div>
-        <div class="field">
-          <label>Local</label>
-          <div class="value">Sergipe ⌄</div>
-          <div class="line"></div>
-        </div>
-        <div class="field">
-          <label>Data/ Mês</label>
-          <div class="value">20/05 ⌄</div>
-          <div class="line"></div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- CARROSSEL -->
-  <section class="carousel" aria-label="Eventos em destaque">
-    <button class="nav prev" aria-label="Anterior">←</button>
-
-    <div class="track" data-track>
-      <div class="slide is-active"><img src="https://picsum.photos/seed/a/1200/480" alt="Slide 1"></div>
-      <div class="slide"><img src="https://picsum.photos/seed/b/1200/480" alt="Slide 2"></div>
-      <div class="slide"><img src="https://picsum.photos/seed/c/1200/480" alt="Slide 3"></div>
-      <div class="slide"><img src="https://picsum.photos/seed/d/1200/480" alt="Slide 4"></div>
+  <main>
+    <div class="home-search-container">
+      <a href="{% url 'lista_eventos' %}" class="btn btn-icon">
+        <i class="fas fa-bars"></i>
+      </a>
+      <form class="home-search-form" action="{% url 'resultado_busca' %}" method="GET">
+        <input type="text" name="termo_busca" class="home-search-input" placeholder="Pesquisar por evento...">
+        <button type="submit" class="home-search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
     </div>
-
-    <button class="nav next" aria-label="Próximo">→</button>
-
-    <div class="dots" role="tablist" aria-label="Selecionar slide">
-      <button class="dot is-active" aria-label="Slide 1"></button>
-      <button class="dot" aria-label="Slide 2"></button>
-      <button class="dot" aria-label="Slide 3"></button>
-      <button class="dot" aria-label="Slide 4"></button>
-    </div>
-  </section>
-
-  <!-- DESTAQUES -->
-  <section class="featured">
-    <h3>🎟️ <strong>Eventos em Destaque:</strong></h3>
-    <div class="featured-row">
-      <a class="card featured-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/f1/400/240" alt="">
-        <div class="fx"><div class="title">Event 001</div><div class="meta">Sertanejo • SP-RJ Dia x/xx</div></div>
-      </a>
-      <a class="card featured-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/f2/400/240" alt="">
-        <div class="fx"><div class="title">Event 002</div><div class="meta">Rock • BH Dia x/xx</div></div>
-      </a>
-      <a class="card featured-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/f3/400/240" alt="">
-        <div class="fx"><div class="title">Event 003</div><div class="meta">Pop • RJ Dia x/xx</div></div>
-      </a>
-      <a class="card featured-card" href="{% url 'event' %}">
-        <img src="https://picsum.photos/seed/f4/400/240" alt="">
-        <div class="fx"><div class="title">Event 004</div><div class="meta">Rap • BH Dia x/xx</div></div>
-      </a>
-    </div>
-  </section>
-
-  <!-- FILTROS -->
-  <div class="filters-bar">
-    <button class="pill">Dias da Semana ⌄</button>
-    <button class="pill">Região ⌄</button>
-    <button class="pill">Categorias ⌄</button>
-  </div>
-
-  <!-- GRID DE EVENTOS -->
-  <section class="events">
-    <div class="event-grid">
+    
+    <div class="carousel-wrapper">
+      <button class="nav prev" aria-label="Anterior">←</button>
       
-      <!-- O loop começa aqui -->
-      {% for evento in eventos %}
-        <!-- O link agora aponta para a página de detalhe específica daquele evento -->
-        <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
-            <img src="https://picsum.photos/seed/event{{evento.id}}/900/520" alt="Imagem do evento {{ evento.nome }}">
-            <div class="body">
-                <div class="date-badge">{{ evento.data|date:"M d" }}</div>
-                <div class="row">
-                    <div class="title">{{ evento.nome }}</div>
-                    <div class="uf">{{ evento.local }}</div>
+      <section class="carousel" aria-label="Eventos Recentes">
+        <div class="track" data-track>
+          {% for evento in eventos_carousel %}
+            <div class="slide">
+              <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
+                {% if evento.imagem %}
+                  <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+                {% else %}
+                  <img src="https://picsum.photos/seed/carousel{{evento.id}}/900/520" alt="Placeholder para {{ evento.nome }}">
+                {% endif %}
+                <div class="body">
+                  <div class="date-badge">{{ evento.data|date:"M d" }}</div>
+                  <div class="row">
+                      <div class="title">{{ evento.nome }}</div>
+                      <div class="uf">{{ evento.local }}</div>
+                  </div>
                 </div>
-                <p class="desc">{{ evento.descricao|truncatewords:10 }}</p>
+              </a>
             </div>
-        </a>
-      {% empty %}
-        <p>Nenhum evento encontrado.</p>
-      {% endfor %}
-      <!-- O loop termina aqui -->
-
+          {% empty %}
+            <p style="text-align: center; width: 100%; padding: 2rem;">Nenhum evento recente para mostrar.</p>
+          {% endfor %}
+        </div>
+      </section>
+      
+      <button class="nav next" aria-label="Próximo">→</button>
     </div>
-</section>
+  </main>
 
-  <!-- VEJA MAIS -->
-  <div class="see-more">
-    <!-- ALTERAÇÃO 2: Link agora aponta para a lista completa de eventos -->
-    <a class="btn btn-outline" href="{% url 'lista_eventos' %}">Veja mais</a>
-  </div>
-
-  <!-- JS do carrossel -->
+  <!-- SCRIPT FINAL E ROBUSTO DO CARROSSEL -->
   <script>
-  (function(){
-    const track = document.querySelector('[data-track]');
-    const slides = Array.from(track.children);
-    const prev = document.querySelector('.carousel .prev');
-    const next = document.querySelector('.carousel .next');
-    const dots = Array.from(document.querySelectorAll('.carousel .dot'));
-    let i = 0;
-    function go(to){
-      i = (to + slides.length) % slides.length;
-      track.style.transform = `translateX(-${i * 100}%)`;
-      slides.forEach((s,idx)=>{
-        s.classList.toggle('is-active', idx===i);
-        s.classList.toggle('is-prev', idx===(i-1+slides.length)%slides.length);
-        s.classList.toggle('is-next', idx===(i+1)%slides.length);
-      });
-      dots.forEach((d,idx)=>d.classList.toggle('is-active', idx===i));
+    const wrapper = document.querySelector('.carousel-wrapper');
+    if (wrapper) {
+        const track = wrapper.querySelector('[data-track]');
+        const nextButton = wrapper.querySelector('.next');
+        const prevButton = wrapper.querySelector('.prev');
+
+        if (track && track.children.length > 0) {
+            nextButton.addEventListener('click', () => {l
+                const scrollAmount = track.clientWidth;
+                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+
+            prevButton.addEventListener('click', () => {
+                const scrollAmount = track.clientWidth;
+                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+        }
     }
-    prev.addEventListener('click', ()=>go(i-1));
-    next.addEventListener('click', ()=>go(i+1));
-    dots.forEach((d,idx)=>d.addEventListener('click', ()=>go(idx)));
-    document.addEventListener('keydown', e=>{
-      if(e.key==='ArrowLeft') go(i-1);
-      if(e.key==='ArrowRight') go(i+1);
-    });
-    go(0);
-  })();
   </script>
 </body>
 </html>

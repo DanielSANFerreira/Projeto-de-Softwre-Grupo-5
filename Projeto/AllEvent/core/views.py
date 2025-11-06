@@ -9,10 +9,10 @@ from .models import Evento
 from django.shortcuts import render, get_object_or_404
 
 def home(request):
-    # Busca os 6 eventos mais recentes (ordenados pela data) para exibir na home
-    eventos_recentes = Evento.objects.order_by('-data')[:6]
+
+    eventos_recentes = Evento.objects.order_by('-data')[:8]
     contexto = {
-        'eventos': eventos_recentes
+        'eventos_carousel': eventos_recentes
     }
     return render(request, 'core/home.html', contexto)
 
@@ -103,8 +103,6 @@ def resultado_busca(request):
     contexto = {'eventos': eventos_filtrados, 'termo_busca': termo}
     return render(request, 'core/lista_eventos.html', contexto)
 
-def event_view(request):
-    return render(request, 'core/event.html')
 
 def detalhe_evento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)

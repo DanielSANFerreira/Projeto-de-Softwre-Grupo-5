@@ -10,18 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header class="site-header compact"> <!-- Adicionada classe compact -->
+    <header class="site-header compact">
         <div class="logo-text">AllEvent</div>
     </header>
 
     <main class="main-content">
-        <form class="auth-form" method="POST"> <!-- Precisa ser POST -->
-    {% csrf_token %} <!-- Obrigatório para segurança -->
+        <form class="auth-form" method="POST"> 
+    {% csrf_token %}
 
-    <!-- Os atributos "name" devem corresponder ao que a view espera -->
+
     <input type="text" name="nome_completo" placeholder="Nome completo" required>
     <input type="email" name="email" placeholder="E-mail" required>
     <input type="password" name="password" placeholder="Senha" required>
@@ -30,7 +30,6 @@
     <button type="submit" class="btn btn-primary">CRIAR CONTA</button>
 </form>
 
-<!-- BÔNUS: Adicione este bloco para mostrar erros de validação (senhas não coincidem, etc.) -->
     {% if messages %}
     <div style="margin-top: 15px;">
          {% for message in messages %}

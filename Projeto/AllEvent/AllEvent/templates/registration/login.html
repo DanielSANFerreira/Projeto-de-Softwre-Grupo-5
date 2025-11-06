@@ -1,13 +1,11 @@
-<!-- Arquivo: templates/registration/login.html -->
-{% extends "base.html" %} <!-- Opcional: se você tiver um template base -->
+{% extends "base.html" %}
 
-{% block content %} <!-- Opcional: se você tiver um template base -->
+{% block content %}
 
 <main class="main-content">
     <div class="auth-card">
         <div class="auth-icon">👤</div>
 
-        <!-- Bloco para exibir erros de login -->
         {% if form.errors %}
             <p style="color: red; font-weight: bold; margin-bottom: 15px;">
                 Usuário ou senha inválidos. Por favor, tente novamente.
@@ -17,7 +15,6 @@
         <form class="auth-form" method="POST">
             {% csrf_token %}
             
-            <!-- Renderiza os campos de usuário e senha automaticamente -->
             {{ form.as_p }}
 
             <button type="submit" class="btn btn-primary">ENTRAR</button>
@@ -27,4 +24,4 @@
     </div>
 </main>
 
-{% endblock %} <!-- Opcional: se você tiver um template base -->
+{% endblock %}
