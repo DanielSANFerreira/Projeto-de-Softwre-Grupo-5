@@ -123,22 +123,18 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = '/' # Ou o nome/caminho da sua home, ex: '/home/'
+LOGIN_REDIRECT_URL = '/' 
 
-# Redireciona para a página de login após o usuário fazer logout
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-# Se um usuário não logado tentar acessar uma página protegida,
-# ele será enviado para a URL com o nome 'login'
 LOGIN_URL = 'login' 
 
-# Adicione esta linha para evitar o erro de CSRF com HTTPS em localhost
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'http://localhost:8000', 'https://127.0.0.1:8000', 'http://127.0.0.1:8000']
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')], # ESTA LINHA É A MAIS IMPORTANTE
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,28 +1,63 @@
-<!-- Em templates/core/lista_eventos.html -->
+<!-- Arquivo: templates/core/lista_eventos.html -->
+
 {% extends "base.html" %}
 
 {% block title %}
     {% if termo_busca %}
         Resultados para "{{ termo_busca }}"
     {% else %}
-        Lista de Eventos
+        Todos os Eventos
     {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="container" style="padding: 2rem 1rem;">
 
+    <!-- O cabeçalho da página muda dependendo se é uma busca ou a lista completa -->
     {% if termo_busca %}
         <h1>Resultados da busca por: "{{ termo_busca }}"</h1>
+        <p><a href="{% url 'lista_eventos' %}">Ver todos os eventos</a></p>
     {% else %}
-        <h1>Próximos Eventos</h1>
+        <h1>Todos os Eventos</h1>
+        <p>Explore o catálogo completo de eventos disponíveis.</p>
     {% endif %}
 
-    <!-- Adicionar um link para a página de busca -->
-    <a href="{% url 'buscar_eventos' %}" class="btn btn-secondary">Fazer uma nova busca</a>
-    <hr style="margin: 2rem 0;">
+    <!-- Adicionamos um link para a página de busca, que agora faz mais sentido -->
+    <a href="{% url 'buscar_eventos' %}" class="btn btn-secondary" style="margin-top: 1rem; margin-bottom: 2rem; display: inline-block;">
+        🔍 Fazer uma busca específica
+    </a>
     
-    <!-- O resto do template (o loop for) continua exatamente o mesmo -->
-    ...
+    <!-- GRID DE EVENTOS (Copiado da home.html) -->
+    <section class="events">
+        <div class="event-grid">
+          
+            <!-- O loop começa aqui -->
+            {% for evento in eventos %}
+                <!-- O link aponta para a página de detalhe específica daquele evento -->
+                <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
+                    <img src="https://picsum.photos/seed/event{{evento.id}}/900/520" alt="Imagem do evento {{ evento.nome }}">
+                    <div class="body">
+                        <div class="date-badge">{{ evento.data|date:"M d" }}</div>
+                        <div class="row">
+                            <div class="title">{{ evento.nome }}</div>
+                            <div class="uf">{{ evento.local }}</div>
+                        </div>
+                        <p class="desc">{{ evento.descricao|truncatewords:10 }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <!-- Esta mensagem aparece se nenhum evento for encontrado -->
+                <div style="grid-column: 1 / -1; text-align: center;">
+                    <p>Nenhum evento encontrado.</p>
+                    {% if termo_busca %}
+                        <p>Tente refazer sua busca com outros termos.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <!-- O loop termina aqui -->
+    
+        </div>
+    </section>
+
 </div>
 {% endblock %}

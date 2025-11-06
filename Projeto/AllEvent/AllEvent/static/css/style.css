@@ -388,7 +388,7 @@ button {
 }
 
 .logout-button {
-    margin-top: auto; /* Empurra o botão de logout para baixo */
+    margin-top: auto;
 }
 
 .profile-content {
@@ -402,7 +402,7 @@ button {
     font-size: var(--fs-xl);
     color: var(--text-color-dark);
     margin-bottom: var(--spacing-xl);
-    border-bottom: 2px solid var(--header-background-start); /* Cor da borda consistente com o header */
+    border-bottom: 2px solid var(--header-background-start); 
     padding-bottom: var(--spacing-sm);
 }
 
@@ -418,7 +418,7 @@ button {
 }
 
 
-/* Card simples (para páginas de "em construção") */
+
 .simple-card {
     padding: var(--spacing-xl);
     max-width: 680px;
@@ -442,9 +442,7 @@ button {
 }
 
 
-/* Estilos da Home (components.css adaptado) */
 
-/* CARD DE BUSCA */
 .search-wrap {
     margin-top: -48px;
     display: flex;
@@ -492,7 +490,7 @@ button {
     margin-top: var(--spacing-xs);
 }
 
-/* CARROSSEL */
+
 .carousel {
     margin: var(--spacing-xxl) auto;
     width: min(1100px, 92vw);
@@ -502,8 +500,7 @@ button {
 .carousel .track {
     display: flex;
     overflow: hidden;
-    border-radius: var(--border-radius-md); /* Menor que o original de 32px para consistência */
-    box-shadow: var(--shadow-md);
+    border-radius: var(--border-radius-md); 
     transition: transform .4s ease;
 }
 .carousel .slide {
@@ -573,10 +570,10 @@ button {
 .carousel .dot.is-active {
     width: var(--spacing-lg);
     height: var(--spacing-lg);
-    background: var(--primary-color); /* Azul principal para o dot ativo */
+    background: var(--primary-color);
 }
 
-/* DESTAQUES (linha) */
+
 .featured {
     width: min(1100px, 92vw);
     margin: var(--spacing-xxl) auto var(--spacing-xl);
@@ -592,19 +589,19 @@ button {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 220px;
-    gap: var(--spacing-xl); /* Ajustado */
+    gap: var(--spacing-xl); 
     overflow-x: auto;
     padding-bottom: var(--spacing-sm);
     scroll-snap-type: x mandatory;
 }
 .featured-card {
     scroll-snap-align: start;
-    border-radius: var(--border-radius-md); /* Ajustado */
+    border-radius: var(--border-radius-md); 
     background: var(--card-background);
-    box-shadow: var(--shadow-sm); /* Ajustado */
+    box-shadow: var(--shadow-sm); 
     overflow: hidden;
     border: 1px solid var(--border-color);
-    display: block; /* Para garantir que o link ocupe todo o card */
+    display: block; 
     color: inherit;
 }
 .featured-card img {
@@ -625,7 +622,6 @@ button {
     margin-top: var(--spacing-xs);
 }
 
-/* FILTROS */
 .filters-bar {
     width: min(1100px, 92vw);
     margin: var(--spacing-xl) auto var(--spacing-sm);
@@ -634,7 +630,7 @@ button {
     flex-wrap: wrap;
 }
 .pill {
-    background: #EEF2FF; /* Cor específica para as pills */
+    background: #EEF2FF; 
     color: var(--text-color-dark);
     border: 0;
     border-radius: var(--border-radius-pill);
@@ -645,14 +641,13 @@ button {
     font-weight: 600;
 }
 
-/* GRID DE EVENTOS */
 .events {
     width: min(1100px, 92vw);
     margin: var(--spacing-xxl) auto var(--spacing-xxl);
 }
 .event-grid {
     display: grid;
-    gap: var(--spacing-xl); /* Ajustado */
+    gap: var(--spacing-xl); 
 }
 @media (min-width: 900px) {
     .event-grid {
@@ -661,12 +656,12 @@ button {
 }
 a.event-card {
     background: var(--card-background);
-    border-radius: var(--border-radius-lg); /* Ajustado */
+    border-radius: var(--border-radius-lg); 
     overflow: hidden;
-    box-shadow: var(--shadow-sm); /* Ajustado */
+    box-shadow: var(--shadow-sm); 
     border: 1px solid var(--border-color);
     transition: transform .15s ease, box-shadow .15s ease;
-    display: block; /* Para garantir que o link ocupe todo o card */
+    display: block;
     color: inherit;
 }
 a.event-card:hover {
@@ -683,7 +678,7 @@ a.event-card:hover {
     padding: var(--spacing-lg) var(--spacing-xl);
 }
 .event-card .date-badge {
-    color: var(--primary-color); /* Cor principal para o badge de data */
+    color: var(--primary-color); 
     font-weight: 800;
     margin-bottom: var(--spacing-sm);
     font-size: var(--fs-sm);
