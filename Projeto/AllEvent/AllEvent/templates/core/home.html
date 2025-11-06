@@ -119,57 +119,54 @@
     </div>
     
     <div class="carousel-wrapper">
-      <button class="nav prev" aria-label="Anterior">←</button>
-      
-      <section class="carousel" aria-label="Eventos Recentes">
-        <div class="track" data-track>
-          {% for evento in eventos_carousel %}
-            <div class="slide">
-              <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
-                {% if evento.imagem %}
-                  <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
-                {% else %}
-                  <img src="https://picsum.photos/seed/carousel{{evento.id}}/900/520" alt="Placeholder para {{ evento.nome }}">
-                {% endif %}
-                <div class="body">
-                  <div class="date-badge">{{ evento.data|date:"M d" }}</div>
-                  <div class="row">
-                      <div class="title">{{ evento.nome }}</div>
-                      <div class="uf">{{ evento.local }}</div>
-                  </div>
+    <button class="nav prev" id="carousel-prev" aria-label="Anterior">←</button>
+    
+    <section class="carousel" aria-label="Eventos Recentes">
+      <div class="track" data-track>
+        {% for evento in eventos_carousel %}
+          <div class="slide">
+            <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
+              {% if evento.imagem %}
+                <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+              {% else %}
+                <img src="https://picsum.photos/seed/carousel{{evento.id}}/900/520" alt="Placeholder para {{ evento.nome }}">
+              {% endif %}
+              <div class="body">
+                <div class="date-badge">{{ evento.data|date:"M d" }}</div>
+                <div class="row">
+                    <div class="title">{{ evento.nome }}</div>
+                    <div class="uf">{{ evento.local }}</div>
                 </div>
-              </a>
-            </div>
-          {% empty %}
-            <p style="text-align: center; width: 100%; padding: 2rem;">Nenhum evento recente para mostrar.</p>
-          {% endfor %}
-        </div>
-      </section>
-      
-      <button class="nav next" aria-label="Próximo">→</button>
-    </div>
+              </div>
+            </a>
+          </div>
+        {% empty %}
+          <p style="text-align: center; width: 100%; padding: 2rem;">Nenhum evento recente para mostrar.</p>
+        {% endfor %}
+      </div>
+    </section>
+    
+    <button class="nav next" id="carousel-next" aria-label="Próximo">→</button>
+</div>
   </main>
 
-  <!-- SCRIPT FINAL E ROBUSTO DO CARROSSEL -->
   <script>
-    const wrapper = document.querySelector('.carousel-wrapper');
-    if (wrapper) {
-        const track = wrapper.querySelector('[data-track]');
-        const nextButton = wrapper.querySelector('.next');
-        const prevButton = wrapper.querySelector('.prev');
+    const track = document.querySelector('[data-track]');
+    const nextButton = document.getElementById('carousel-next'); 
+    const prevButton = document.getElementById('carousel-prev'); 
 
-        if (track && track.children.length > 0) {
-            nextButton.addEventListener('click', () => {l
-                const scrollAmount = track.clientWidth;
-                track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            });
+    if (track && nextButton && prevButton && track.children.length > 0) {
+        
+        nextButton.addEventListener('click', () => {
+            const scrollAmount = track.clientWidth;
+            track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
 
-            prevButton.addEventListener('click', () => {
-                const scrollAmount = track.clientWidth;
-                track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            });
-        }
+        prevButton.addEventListener('click', () => {
+            const scrollAmount = track.clientWidth;
+            track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
     }
-  </script>
+</script>
 </body>
 </html>
